@@ -707,11 +707,10 @@ body
 	(TODO: some of this code should be on backbone)
     DivTable
 *******************************************************************************/
-
-.faces-DivTable .headerRow,
+.faces-DivTable .headerRow, 
 .faces-DivTable .headerRow .rowOdd
 {
-    background: #4496c6 -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0)));
+  background: #4496C6;
 }
 
 .faces-DivTable .headerWrapper
@@ -720,6 +719,24 @@ body
     float: left;
     text-align: center;
 }
+
+.faces-DivTable .headerRow .faces-Label
+{
+    color: #fff;
+}
+
+.faces-DivTable .columnGroup .headerRow
+{
+    border-width: 1px 1px 0 0;
+}
+
+.faces-DivTable .headerRow .column,
+.faces-DivTable .columnGroup .headerRow
+{
+    border-color: #396986;
+    border-style: solid;
+}
+
 
 .faces-DivTable .headerWrapper > .arrow 
 {
@@ -779,30 +796,50 @@ body
 .faces-DivTable .column
 {
 	width: 100px;
-}
-
-.faces-DivTable .column,
-.faces-DivTable .columnGroup .headerRow
-{
-    border: 1px solid #A1B9CC;
     vertical-align: middle;
+    border-style: solid;
+	border-color: #A1B9CC;
     border-width: 1px 1px 0 0;
 }
 
-.faces-DivTable .row--selected:not\(rowOdd\), .faces-DivTable .row--selected:not\(rowEven\) 
+.faces-DivTable .row--selected:not\(rowOdd\), 
+.faces-DivTable .row--selected:not\(rowEven\) 
 {
     background: #8ABDDB;
     box-sizing: border-box;
 }
 
-.faces-DivTable .row--selected:not\(\rowOdd\), .faces-DivTable .row--selected:not\(\rowEven\)
+.faces-DivTable .row--selected:not\(rowOdd\),
+.faces-DivTable .row--selected:not\(rowEven\)
 {
-	background: #9FB7E5 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
+	background: #4496C6 -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.55)), to(rgba(255, 255, 255, 0)));
+}
+
+.faces-DivTable .row--selected:not\(rowOdd\) .column, 
+.faces-DivTable .row--selected:not\(rowEven\) .column
+{
+  border-color: #1A6299;
+}
+
+.faces-DivTable .row--selected:not\(rowOdd\) .faces-Label, 
+.faces-DivTable .row--selected:not\(rowEven\) .faces-Label 
+{
+    color:#fff;
 }
 
 .faces-DivTable .rowOdd
 {
 	background: #F4F5F5 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
+}
+
+.faces-DivTable .row .column:last-child
+{
+  border-width: 1px  0 0 0;
+}
+
+.faces-DivTable .row .column .gwt-RadioButton input
+{
+    margin: 7px;
 }
 
 /******************************************************************************
@@ -860,8 +897,13 @@ body
 .faces-Pager .nextPanel .faces-Button
 {
     display:block;
-    padding: 12px;
+    padding: 14px;
     border: none;
+}
+
+.faces-Pager .faces-Button:disabled
+{
+	border: none; 
 }
 
 .faces-Pager .previousButton,
@@ -933,6 +975,7 @@ body
     display: inline-block;
     vertical-align: middle;
     margin: 10px auto;
+    border: 1px solid #ccc;
 }
 
 .faces-SequentialPager > div
@@ -1002,7 +1045,7 @@ body
 {
     margin: 0;
     padding: 3px;
-    height: 25px;
+    height: 28px;
 }
 
 /******************************************
@@ -1012,7 +1055,6 @@ body
 .swapPagerWrapper .backPanel .faces-Button,
 .swapPagerWrapper .nextPanel .faces-Button 
 {
-    transform: rotate(90deg);
     max-width: 24px;
 }
 
@@ -1371,22 +1413,10 @@ td > div > .faces--group
 }
 
 /* ------------ Combobox ---------------- */
-
-.faces-ComboBox .optionPanel
+.faces-ComboBox
 {
-	background-color: #FFFFFF;
-}
-
-.faces-ComboBox .optionPanel:hover * 
-{
-	background-color: #4496c6;
-	color: #fff;
-	cursor: pointer;
-}
-
-.itemList
-{
-	
+  width: auto !important;
+  border: 1px solid #ccc;
 }
 
 .faces-ComboBox .text
@@ -1398,6 +1428,64 @@ td > div > .faces--group
 {
 	background: rgb(221, 221, 221) svgIconArrowDown no-repeat center;
 	background-size: auto 80%;
+}
+
+.faces-ComboBox .text,
+.faces-ComboBox .button
+{
+  padding: 4px 6px;
+  border: none;
+}
+
+.faces-ComboBox .button
+{
+  width: 25px;
+}
+
+/* Class for the combo box popup */
+.comboBoxPopup
+{
+  /* Backbone */
+  position: absolute !important; /* TODO: a classe do faces popup está fixed e no caso do combo box deve ser absolute*/ 
+
+  /* Showcase */
+  min-width: 216px; /* TODO: essa largura deveria ser calculada */
+}
+
+.comboBoxPopup .faces-Pager .page
+{
+  padding: 6px 4px;
+  max-width: 100%;
+  display: table;
+}
+
+
+/* List items */
+.comboBoxPopup .itemList .faces-Pager .page .optionPanel
+{
+  /* Backbone */
+  padding: 4px 2px;
+  display: table-row;
+}
+
+.comboBoxPopup .itemList .faces-Pager .page .optionPanel:hover
+{
+  /* Showcase */
+  background: #e3e3e3;
+}
+
+.comboBoxPopup .itemList .faces-Pager .page .optionPanel .line
+{
+  display: table-row;
+  width: 100%;
+}
+
+.comboBoxPopup .itemList .faces-Pager .page .optionPanel .line > *
+{
+  /* Backbone */
+  display: table-cell;
+  vertical-align: middle;
+  padding: 4px;
 }
 
 /* ------------ SwapPanel ---------------- */
@@ -1419,3 +1507,82 @@ td > div > .faces--group
 	0%   {left:-50%;}
 	100%  {left:101%;}
 }
+
+
+/* ------------ WidgetList ---------------- */
+
+.faces-WidgetList .faces-SwapPanel .line
+{
+  /*Backbone*/
+  display: table-row;
+  /*Showcase*/
+  height: 60px;
+}
+
+.faces-WidgetList .faces-SwapPanel .line > *
+{
+  /*Backbone*/
+	display: table-cell;
+ 	vertical-align: middle;
+ 	margin: 6px 8px;
+}
+
+.faces-WidgetList .faces-Pager .faces-SwapPager
+{
+  /*Backbone*/
+  display: table-row;
+  /*Showcase*/
+  width: 300px;
+}
+
+.faces-WidgetList .backPanel,
+.faces-WidgetList .nextPanel,
+.faces-WidgetList .faces-SwapPanel
+{
+  /*Backbone*/
+  display: table-cell;
+}
+
+.faces-WidgetList .backPanel,
+.faces-WidgetList .nextPanel,
+.faces-WidgetList .faces-SwapPanel
+{
+  /*Showcase*/
+  vertical-align: middle;
+}
+
+/* ------------ End WidgetList ---------------- */
+
+/* --------------- Carousel -------------------- */
+.carousel
+{
+  /*Showcase*/
+  width: 80%;
+  margin-top: 100px;
+}
+
+.carousel .faces-Pager.faces-SwapPager
+{
+  /*Backbone*/
+  display: table-row;
+  /*Showcase*/
+  width: 300px;
+}
+
+.carousel .backPanel,
+.carousel .nextPanel,
+.carousel .faces-SwapPanel
+{
+  /*Backbone*/
+  display: table-cell;
+}
+
+.carousel .backPanel,
+.carousel .nextPanel,
+.carousel .faces-SwapPanel
+{
+  /*Showcase*/
+  vertical-align: baseline;
+}
+
+/* ------------ End Carousel ---------------- */
